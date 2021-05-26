@@ -1,0 +1,51 @@
+{% set name = "toppra" %}
+{% set version = "0.4.1" %}
+
+package:
+  name: "{{ name|lower }}"
+  version: "{{ version }}"
+
+source:
+  git_url: https://github.com/johnwason/toppra
+  git_rev: readme_invalid_chars
+build:
+  number: 0
+  script: "{{ PYTHON }} -m pip install . -vv"
+
+requirements:
+  host:
+    - matplotlib
+    - numpy
+    - pip
+    - python
+    - scipy >0.18
+    - cython
+    - setuptools
+    - wheel
+    - ninja # [win]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  run:
+    - matplotlib
+    - numpy
+    - python
+    - scipy >0.18
+    - cython
+    - setuptools
+    - wheel
+
+test:
+  imports:
+    - toppra
+    - toppra.algorithm
+    - toppra.algorithm.reachabilitybased
+    - toppra.constraint
+    - toppra.cpp
+    - toppra.solverwrapper
+
+about:
+  home: "https://github.com/hungpham2511/toppra"
+  license: MIT
+  license_family: MIT
+  summary: "toppra: time-optimal parametrization of trajectories for robots subject to constraints."
+
